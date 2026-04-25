@@ -11,11 +11,11 @@ export function EventTypeCard({ eventType }: EventTypeCardProps) {
   return (
     <Card withBorder shadow="sm" radius="md" padding="lg">
       <Stack gap="md">
-        <Group justify="space-between" align="start">
-          <Title order={3} size="h4">
+        <Group justify="space-between" align="start" gap="xs">
+          <Title order={3} size="h4" style={{ flex: "1 1 160px", minWidth: 0 }}>
             {eventType.title}
           </Title>
-          <Badge color="orange" variant="light" leftSection={<IconClock size={14} />}>
+          <Badge color="orange" variant="light" leftSection={<IconClock size={14} />} style={{ flexShrink: 0 }}>
             {eventType.duration} min
           </Badge>
         </Group>
