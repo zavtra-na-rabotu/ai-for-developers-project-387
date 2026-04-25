@@ -1,0 +1,17 @@
+# MacOS
+.DS_Store
+
+# Default TypeSpec output
+tsp-output/
+dist/
+
+# Test artifacts
+.cache/
+playwright-report/
+test-results/
+
+# Dependency directories
+node_modules/
+
+# Claude Code personal settings
+.claude/settings.local.json

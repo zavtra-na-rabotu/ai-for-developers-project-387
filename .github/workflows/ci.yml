@@ -1,0 +1,55 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.mod
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install web dependencies
+        run: npm ci --prefix web
+
+      - name: Compile TypeSpec contract
+        run: npm run api:compile
+
+      - name: Generate frontend API types
+        run: npm run web:api:types
+
+      - name: Build frontend
+        run: npm run web:build
+
+      - name: Run backend tests
+        run: npm run test:backend
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+        working-directory: web
+
+      - name: Run integration E2E tests
+        run: npm run test:web:e2e

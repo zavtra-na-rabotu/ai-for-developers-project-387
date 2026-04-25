@@ -1,0 +1,30 @@
+{
+  "name": "naberi",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "api:compile": "tsp compile .",
+    "test": "npm run api:compile && npm run web:api:types && npm run web:build && npm run test:backend && npm run test:web:e2e",
+    "test:backend": "cd backend && go test ./...",
+    "test:web:install": "npm exec --prefix web playwright -- install chromium",
+    "test:web:e2e": "npm run test:e2e --prefix web",
+    "mock": "prism mock tsp-output/schema/openapi.yaml --port 4010",
+    "web:dev": "npm run dev --prefix web",
+    "web:build": "npm run build --prefix web",
+    "web:api:types": "npm run api:types --prefix web",
+    "mcp:playwright": "npx @playwright/mcp@latest --isolated --allowed-hosts=127.0.0.1,localhost",
+    "mcp:chrome-devtools": "npx chrome-devtools-mcp@latest --isolated --viewport=1280x720"
+  },
+  "dependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/rest": "latest"
+  },
+  "packageManager": "npm@11.12.1+sha512.cdca14b85d647b3192028d02aadbe82d75f79a446aceea9874be98e6d768f20ebd3555770a48d0e9906106007877bbc690f715e9372f2e2dc644a3c3157fb14c",
+  "devDependencies": {
+    "@stoplight/prism-cli": "^5.15.10"
+  }
+}

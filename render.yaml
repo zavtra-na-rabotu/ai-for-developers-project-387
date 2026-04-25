@@ -1,0 +1,11 @@
+services:
+  - type: web
+    runtime: docker
+    name: naberi
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      - key: PORT
+        value: 10000

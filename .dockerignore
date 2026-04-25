@@ -1,0 +1,13 @@
+node_modules
+web/node_modules
+tsp-output
+web/dist
+backend/tmp
+.git
+.cache
+.gitignore
+Dockerfile
+README.md
+docs
+web/playwright-report
+web/test-results
