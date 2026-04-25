@@ -12,7 +12,7 @@ export function EventTypeCard({ eventType }: EventTypeCardProps) {
     <Card withBorder shadow="sm" radius="md" padding="lg">
       <Stack gap="md">
         <Group justify="space-between" align="start" gap="xs">
-          <Title order={3} size="h4" style={{ flex: "1 1 160px", minWidth: 0 }}>
+          <Title order={3} size="h4" style={{ flex: 1, minWidth: 0 }}>
             {eventType.title}
           </Title>
           <Badge color="orange" variant="light" leftSection={<IconClock size={14} />} style={{ flexShrink: 0 }}>
