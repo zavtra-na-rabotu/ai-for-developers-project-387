@@ -67,7 +67,7 @@ a {
   font-weight: 700;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .guest-shell {
     padding: 22px 14px 40px;
   }
