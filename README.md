@@ -45,9 +45,3 @@ npm test
 The install command is needed once per local machine to download Chromium for Playwright. The full check compiles the TypeSpec contract, regenerates frontend API types, builds the web app, runs Go backend tests, and runs Playwright integration E2E tests against a real Go API and Vite frontend.
 
 Browser MCP setup for exploratory checks is documented in `docs/browser-mcp.md`.
-
-## Scheduled Lighthouse reports
-
-The `lighthouse-nightly` GitHub Actions workflow runs Lighthouse CI at 04:17 Moscow time on weekdays and can also be started manually from the Actions tab. It builds the frontend, serves it through the Go backend, audits the guest and admin entry pages, and stores the HTML/JSON reports as a workflow artifact for 14 days.
-
-Each run also writes a Markdown summary to the GitHub Actions job summary. Morning review decisions and accepted fixes are tracked in `docs/lighthouse-action-items.md`.
