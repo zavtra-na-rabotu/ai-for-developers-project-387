@@ -1,0 +1,81 @@
+name: lighthouse-nightly
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lighthouse-nightly
+  cancel-in-progress: false
+
+jobs:
+  lighthouse:
+    # Temporarily disabled. Remove this guard and restore the schedule to re-enable.
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.mod
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install web dependencies
+        run: npm ci --prefix web
+
+      - name: Compile TypeSpec contract
+        run: npm run api:compile
+
+      - name: Generate frontend API types
+        run: npm run web:api:types
+
+      - name: Build frontend
+        run: npm run web:build
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.15.x
+
+      - name: Run Lighthouse CI
+        id: lhci
+        continue-on-error: true
+        run: lhci autorun
+
+      - name: Build morning summary
+        if: always()
+        run: node scripts/lighthouse-summary.mjs lighthouse-report
+
+      - name: Add report to job summary
+        if: always()
+        run: cat lighthouse-report/summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-nightly-${{ github.run_id }}
+          path: |
+            lighthouse-report
+            .lighthouseci
+          retention-days: 14
+
+      - name: Fail when Lighthouse CI failed
+        if: steps.lhci.outcome == 'failure'
+        run: exit 1
