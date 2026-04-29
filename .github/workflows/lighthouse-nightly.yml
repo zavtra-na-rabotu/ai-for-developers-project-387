@@ -1,9 +1,6 @@
 name: lighthouse-nightly
 
 on:
-  schedule:
-    # Runs at 04:17 Moscow time on weekdays.
-    - cron: "17 1 * * 1-5"
   workflow_dispatch:
 
 permissions:
@@ -15,6 +12,8 @@ concurrency:
 
 jobs:
   lighthouse:
+    # Temporarily disabled. Remove this guard and restore the schedule to re-enable.
+    if: ${{ false }}
     runs-on: ubuntu-latest
 
     steps:

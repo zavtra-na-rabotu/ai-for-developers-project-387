@@ -1,10 +1,10 @@
 # Lighthouse Action Items
 
-Use this file for decisions made during the morning Lighthouse review. The scheduled workflow stores the detailed HTML and JSON reports as a GitHub Actions artifact, while the run summary lists the first set of candidate fixes.
+Use this file for decisions made during Lighthouse review. The workflow is temporarily disabled, but the review process is kept here for when it is re-enabled.
 
 ## Review Cadence
 
-- Open the latest `lighthouse-nightly` workflow run each morning.
+- Open the latest `lighthouse-nightly` workflow run after re-enabling Lighthouse.
 - Read the run summary and download the `lighthouse-nightly-<run-id>` artifact.
 - Open the HTML reports from `lighthouse-report/` when a score needs investigation.
 - Move accepted fixes into the table below or create focused GitHub issues.

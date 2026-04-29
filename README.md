@@ -48,6 +48,6 @@ Browser MCP setup for exploratory checks is documented in `docs/browser-mcp.md`.
 
 ## Scheduled Lighthouse reports
 
-The `lighthouse-nightly` GitHub Actions workflow runs Lighthouse CI at 04:17 Moscow time on weekdays and can also be started manually from the Actions tab. It builds the frontend, serves it through the Go backend, audits the guest and admin entry pages, and stores the HTML/JSON reports as a workflow artifact for 14 days.
+The `lighthouse-nightly` GitHub Actions workflow is temporarily disabled and does not run Lighthouse CI. Its configuration, summary script, and review notes are kept in the repository so the workflow can be re-enabled later without recreating them.
 
-Each run also writes a Markdown summary to the GitHub Actions job summary. Morning review decisions and accepted fixes are tracked in `docs/lighthouse-action-items.md`.
+When enabled, the workflow builds the frontend, serves it through the Go backend, audits the guest and admin entry pages, and stores the HTML/JSON reports as a workflow artifact for 14 days. Each run also writes a Markdown summary to the GitHub Actions job summary. Review decisions and accepted fixes are tracked in `docs/lighthouse-action-items.md`.
